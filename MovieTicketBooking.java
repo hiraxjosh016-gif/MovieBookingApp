@@ -1,3 +1,9 @@
+/* Nalubega Rashida   26/U/0313
+Hiire Joshua	     26/U/03509/PS
+Ssali Lameck Ssewankambo	26/U/03638/PSA
+Nahurira Godwin	   26/U/03590/PSA
+ */
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -11,13 +17,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-
+//Vault
 public class MovieTicketBooking extends JFrame {
     private static final BookingMovie[] MOVIES = {
         new BookingMovie("The Last Adventure", "2 hours 10 minutes", "7:00 PM", 8.02),
         new BookingMovie("Avengers", "2 hours", "2:00 PM", 8.02)
     };
-
+// Handles seat availability and booking status for all movies
     private final SeatManager seatManager = new SeatManager(MOVIES.length);
     private final JButton[][] seatButtons =
             new JButton[SeatManager.ROWS][SeatManager.SEATS_PER_ROW];
@@ -32,7 +38,7 @@ public class MovieTicketBooking extends JFrame {
     private final boolean[][] selected =
             new boolean[SeatManager.ROWS][SeatManager.SEATS_PER_ROW];
     private int selectedMovie;
-
+//Creates and initializes the booking window.    
     public MovieTicketBooking() {
         setTitle("Movie Ticket Booking");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,7 +52,7 @@ public class MovieTicketBooking extends JFrame {
         movieChoices.addActionListener(event -> changeMovie());
         updateMovieInfo();
     }
-
+//top panel
     private JPanel createMovieInfo() {
         JPanel movieInfo = new JPanel(new GridLayout(5, 1, 0, 4));
         movieInfo.setBorder(BorderFactory.createEmptyBorder(15, 20, 5, 20));
@@ -62,7 +68,7 @@ public class MovieTicketBooking extends JFrame {
 
         return movieInfo;
     }
-
+//seating layout
     private JPanel createSeatArea() {
         JPanel seatArea = new JPanel(new BorderLayout(8, 8));
         seatArea.setBorder(BorderFactory.createEmptyBorder(5, 25, 5, 25));
@@ -101,7 +107,7 @@ public class MovieTicketBooking extends JFrame {
         seatArea.add(seatGrid, BorderLayout.CENTER);
         return seatArea;
     }
-
+//controls for booking
     private JPanel createBookingControls() {
         JPanel controls = new JPanel(new GridLayout(3, 1, 5, 5));
         controls.setBorder(BorderFactory.createEmptyBorder(5, 25, 15, 25));
@@ -125,7 +131,7 @@ public class MovieTicketBooking extends JFrame {
             return;
         }
 
-        // Each click toggles only this seat; other selected seats are untouched
+        // Selecting or deselecting a seat
         selected[row][seat] = !selected[row][seat];
         updateSeatButton(row, seat);
         updateSelectionLabel();
@@ -216,7 +222,12 @@ public class MovieTicketBooking extends JFrame {
                         + "\nPayment method: " + paymentMethod
                         + "\nPayment is simulated; no money was charged.");
     }
-
+/*
+  Changing the appearance of seat buttons:
+   O = Available
+  Selected = Chosen by user
+  X = Already booked
+ */
     private void updateSeatButton(int row, int seat) {
         JButton seatButton = seatButtons[row][seat];
         if (seatManager.isBooked(selectedMovie, row, seat)) {
@@ -233,7 +244,7 @@ public class MovieTicketBooking extends JFrame {
             seatButton.setEnabled(true);
         }
     }
-
+// Updating the display when the user chooses a different movie
     private void changeMovie() {
         selectedMovie = movieChoices.getSelectedIndex();
         clearSelection();
@@ -245,7 +256,7 @@ public class MovieTicketBooking extends JFrame {
             }
         }
     }
-
+//Displaying selected movie information
     private void updateMovieInfo() {
         BookingMovie movie = MOVIES[selectedMovie];
         movieDetailsLabel.setText("Movie: " + movie.getTitle());
@@ -263,6 +274,7 @@ public class MovieTicketBooking extends JFrame {
     }
 
     public static void main(String[] args) {
+        //runing the main class, invokelater for swing thread execution
         SwingUtilities.invokeLater(() -> new MovieTicketBooking().setVisible(true));
     }
 }
