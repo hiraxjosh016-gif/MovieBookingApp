@@ -10,3 +10,4 @@ MovieTicketBooking.java-This is the main application class that provides the gra
 -java Swing
 -OOP
 -Github
+Authors: Group 10 members
